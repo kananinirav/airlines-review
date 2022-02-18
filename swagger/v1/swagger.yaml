@@ -3,11 +3,6 @@ openapi: 3.0.1
 info:
   title: API V1
   version: v1
-servers:
-- url: http://{defaultHost}
-  variables:
-    defaultHost:
-      default: localhost:3000
 paths:
   "/api/v1/airlines":
     post:
@@ -384,3 +379,8 @@ paths:
       responses:
         '204':
           description: Reviews Deleted
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: fierce-eyrie-99597.herokuapp.com
