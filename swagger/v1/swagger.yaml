@@ -1,0 +1,386 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
+paths:
+  "/api/v1/airlines":
+    post:
+      summary: Creates a Airlines
+      tags:
+      - Airlines
+      parameters: []
+      responses:
+        '200':
+          description: Airlines created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                image_url:
+                  type: string
+              required:
+              - name
+          application/xml:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                image_url:
+                  type: string
+              required:
+              - name
+    get:
+      summary: Get all airlines
+      tags:
+      - Airlines
+      responses:
+        '200':
+          description: Airlines found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        attributes:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            image_url:
+                              type: string
+                            slug:
+                              type: string
+                            avg_score:
+                              type: integer
+                        relationships:
+                          type: object
+                          properties:
+                            reviews:
+                              type: object
+                              properties:
+                                data:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      title:
+                                        type: string
+                                      description:
+                                        type: string
+                                      score:
+                                        type: integer
+                                      airline_id:
+                                        type: integer
+                  included:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        attributes:
+                          type: object
+                          properties:
+                            title:
+                              type: string
+                            description:
+                              type: string
+                            score:
+                              type: integer
+                            airline_id:
+                              type: integer
+                required:
+                - name
+                - image_url
+                - slug
+                - avg_score
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        attributes:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            image_url:
+                              type: string
+                            slug:
+                              type: string
+                            avg_score:
+                              type: integer
+                        relationships:
+                          type: object
+                          properties:
+                            reviews:
+                              type: object
+                              properties:
+                                data:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      title:
+                                        type: string
+                                      description:
+                                        type: string
+                                      score:
+                                        type: integer
+                                      airline_id:
+                                        type: integer
+                  included:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        attributes:
+                          type: object
+                          properties:
+                            title:
+                              type: string
+                            description:
+                              type: string
+                            score:
+                              type: integer
+                            airline_id:
+                              type: integer
+                required:
+                - name
+                - image_url
+                - slug
+                - avg_score
+        '404':
+          description: Airlines not found
+  "/api/v1/airlines/{slug}":
+    get:
+      summary: Find Airlines using slug
+      tags:
+      - Airlines
+      parameters:
+      - name: slug
+        in: path
+        example: united-airlines
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Airlines found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      attributes:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          image_url:
+                            type: string
+                          slug:
+                            type: string
+                          avg_score:
+                            type: integer
+                      relationships:
+                        type: object
+                        properties:
+                          reviews:
+                            type: object
+                            properties:
+                              data:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    title:
+                                      type: string
+                                    description:
+                                      type: string
+                                    score:
+                                      type: integer
+                                    airline_id:
+                                      type: integer
+                  included:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        attributes:
+                          type: object
+                          properties:
+                            title:
+                              type: string
+                            description:
+                              type: string
+                            score:
+                              type: integer
+                            airline_id:
+                              type: integer
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      attributes:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          image_url:
+                            type: string
+                          slug:
+                            type: string
+                          avg_score:
+                            type: integer
+                      relationships:
+                        type: object
+                        properties:
+                          reviews:
+                            type: object
+                            properties:
+                              data:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    title:
+                                      type: string
+                                    description:
+                                      type: string
+                                    score:
+                                      type: integer
+                                    airline_id:
+                                      type: integer
+                  included:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        attributes:
+                          type: object
+                          properties:
+                            title:
+                              type: string
+                            description:
+                              type: string
+                            score:
+                              type: integer
+                            airline_id:
+                              type: integer
+    delete:
+      summary: Delete Airlines using slug
+      tags:
+      - Airlines
+      parameters:
+      - name: slug
+        in: path
+        example: fack-airline
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Airlines Deleted
+  "/api/v1/reviews":
+    post:
+      summary: Creates a Reviews
+      tags:
+      - Reviews
+      parameters: []
+      responses:
+        '200':
+          description: Reviews created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                score:
+                  type: integer
+                airline_id:
+                  type: integer
+              required:
+              - title
+              - description
+              - airline_id
+  "/api/v1/reviews/{id}":
+    delete:
+      summary: Delete Reviews using id
+      tags:
+      - Reviews
+      parameters:
+      - name: id
+        in: path
+        example: 1
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: Reviews Deleted
